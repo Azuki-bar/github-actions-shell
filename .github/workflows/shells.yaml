@@ -22,23 +22,25 @@ jobs:
         run: |
           false | echo 'error occurred'
           echo 'after error' # this command will not be triggered
-  go-as-shell:
+  docker-compose:
+    timeout-minutes: 1
     runs-on: ubuntu-22.04
     steps:
-      - name: prepare go
-        run: go mod init test
-      - name: run with go
-        shell: "go run {0}"
+      - name: docker-compose
+        shell: "docker compose -f {0} up --build"
         run: |
-          package main
+          services:
+            connect:
+              image: ubuntu:latest
+              restart: always
+              entrypoint:
+                - "bash"
+                - "-c"
+                - "echo 'conn' > /dev/tcp/db/3306"
+            db:
+              image: mysql:latest
+              environment:
+                MYSQL_ALLOW_EMPTY_PASSWORD: yes
+              ports:
+                - 3306:3306
 
-          import (
-                  "log"
-                  "os"
-          )
-
-          func main() {
-                  for _, v := range os.Environ() {
-                          log.Println(v)
-                  }
-          }
