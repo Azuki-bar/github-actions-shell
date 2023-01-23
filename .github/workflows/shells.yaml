@@ -26,6 +26,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Run pacman in archlinux cointainer
-        run: |
-          pacman -Syyu
+        run: "pacman -Syu"
         shell: "cat {0} | docker run --rm -i archlinux bash"
+  where-tmp:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Run pacman in archlinux cointainer
+        run: "awesome command"
+        shell: "ls -la {0}"
