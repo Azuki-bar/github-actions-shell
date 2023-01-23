@@ -1,0 +1,27 @@
+Name: play with shell option
+
+on: push
+
+jobs:
+  run-python:
+    name: Run python
+    shell: python
+    run: |
+      import sys
+      print(sys.version)
+  shell-unspecified:
+    name: Run Bash
+    run: |
+      false | echo 'error occured'
+      echo 'after error' # this command will be triggered
+  shell-specified-bash: 
+    name: Run Bash
+    shell: bash
+    run: |
+      false | echo 'error occured'
+      echo 'after error' # this command will not be triggered
+  shell-in-docker:
+    name: Run pacman in archlinux cointainer
+    run: |
+      pacman -Syyu
+    shell: 'cat {0} | docker run --rm -i archlinux bash'
