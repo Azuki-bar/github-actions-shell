@@ -25,6 +25,8 @@ jobs:
   go-as-shell:
     runs-on: ubuntu-22.04
     steps:
+      - name: prepare go
+        run: go mod init test
       - name: run with go
         shell: "go run {0}"
         run: |
