@@ -22,16 +22,21 @@ jobs:
         run: |
           false | echo 'error occured'
           echo 'after error' # this command will not be triggered
-  shell-in-docker:
+  go-as-shell:
     runs-on: ubuntu-22.04
     steps:
-      - name: Run pacman in archlinux cointainer
-        run: "pacman -Syu"
-        shell: "docker --volume ./:/home/runner/work/:ro -w /home/runner/work run --rm -i archlinux bash {0}"
-  where-tmp:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Run pacman in archlinux cointainer
+      - name: run with go
+        shell: "go run {0}"
         run: |
-          ls -la .
-          pwd
+          package main
+
+          import (
+                  "log"
+                  "os"
+          )
+
+          func main() {
+                  for _, v := range os.Environ() {
+                          log.Println(v)
+                  }
+          }
