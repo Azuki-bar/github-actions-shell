@@ -15,12 +15,12 @@ jobs:
     steps:
       - name: Run Bash
         run: |
-          false | echo 'error occured'
+          false | echo 'error occurred'
           echo 'after error' # this command will be triggered
       - name: Run Bash with shell specification
         shell: bash
         run: |
-          false | echo 'error occured'
+          false | echo 'error occurred'
           echo 'after error' # this command will not be triggered
   go-as-shell:
     runs-on: ubuntu-22.04
