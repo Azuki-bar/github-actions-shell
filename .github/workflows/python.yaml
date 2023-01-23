@@ -1,4 +1,4 @@
-Name: shell options demo
+name: shell options demo
 
 on: push
 jobs:
