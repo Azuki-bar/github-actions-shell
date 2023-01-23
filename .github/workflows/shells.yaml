@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: docker-compose
-        shell: "docker compose -f {0} up --build"
+        shell: "docker compose -f {0} up"
         run: |
           services:
             connect:
@@ -41,6 +41,4 @@ jobs:
               image: mysql:latest
               environment:
                 MYSQL_ALLOW_EMPTY_PASSWORD: yes
-              ports:
-                - 3306:3306
 
